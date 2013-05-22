@@ -1,0 +1,4 @@
+SELECT ra_PS AS ra
+FROM Object
+WHERE ra_PS BETWEEN 170. AND 190.
+  AND decl_PS BETWEEN -15. AND 0.;
