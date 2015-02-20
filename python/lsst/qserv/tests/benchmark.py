@@ -44,6 +44,7 @@ import sys
 from filecmp import dircmp
 
 from lsst.qserv.admin import commons
+from lsst.qserv.admin import dataDuplicate
 from lsst.qserv.tests import dataConfig
 from lsst.qserv.tests import mysqlDbLoader
 from lsst.qserv.tests import qservDbLoader
@@ -254,6 +255,10 @@ class Benchmark(object):
             self._dbName = "qservTest_case%s_%s" % (self._case_id, self._mode)
 
             if load_data:
+                if self.dataReader.duplicatedTables:
+                    self.logger.info("Duplicating Tables %s" % self.dataReader.duplicatedTables)
+                    RunDuplicate(x,y,z)
+                    sys.exit()
                 self.connectAndInitDatabases()
                 self.loadData()
                 self.finalize()

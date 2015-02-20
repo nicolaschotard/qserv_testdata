@@ -30,6 +30,7 @@ import sys
 import logging
 
 from lsst.qserv.admin import commons
+from lsst.qserv.admin import dataDuplicate
 from lsst.qserv.tests.dbLoader import DbLoader
 from lsst.qserv.tests.sql import cmd, connection
 

@@ -106,6 +106,11 @@ class DataConfig(dict):
         return r if r else {}
 
     @property
+    def duplicatedTables(self):
+        v = self['duplicate'].get('tables')
+        return v if v else []
+
+    @property
     def _rsyncBaseUrl(self):
         '''
         @return the parent rsync url for remote big data files
