@@ -44,7 +44,7 @@ import sys
 from filecmp import dircmp
 
 from lsst.qserv.admin import commons
-from lsst.qserv.admin import dataDuplicate
+from lsst.qserv.admin import dataDuplicator
 from lsst.qserv.tests import dataConfig
 from lsst.qserv.tests import mysqlDbLoader
 from lsst.qserv.tests import qservDbLoader
@@ -79,6 +79,7 @@ class Benchmark(object):
         self.dataReader = dataConfig.DataConfig(self._in_dirname)
 
         self._queries_dirname = os.path.join(dataset_dir, "queries")
+        self.dataDuplicator = dataDuplicator.DataDuplicator(self.dataReader,self._in_dirname,self._out_dirname)
 
     @staticmethod
     def getDatasetDir(testdata_dir, case_id):
@@ -256,11 +257,12 @@ class Benchmark(object):
 
             if load_data:
                 if self.dataReader.duplicatedTables:
-                    self.logger.info("Duplicating Tables %s" % self.dataReader.duplicatedTables)
-                    RunDuplicate(x,y,z)
-                    sys.exit()
+                    self.logger.info("Tables to Duplicate %s" % self.dataReader.duplicatedTables)
+                    self.dataDuplicator.run()
                 self.connectAndInitDatabases()
                 self.loadData()
+                print "YYYYYYYYYYYYYYYYYYYYYYYYYY"
+                sys.exit()
                 self.finalize()
 
             self.runQueries(stop_at_query)

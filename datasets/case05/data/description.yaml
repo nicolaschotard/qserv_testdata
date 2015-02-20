@@ -5,7 +5,6 @@ tables:
 extensions:
     data: '.txt'
     schema: '.sql'
-    zip: '.gz'
 # Indicating if duplicator is going to be used
 duplicate:
     tables: ["Object","Source"]
