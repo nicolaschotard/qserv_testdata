@@ -65,23 +65,32 @@ class DbLoader(object):
                     '-vvv']
         elif logLevel is logging.INFO:
             cmd += ['-v']
-
+        
         cmd += ['--config={0}'.format(os.path.join(self.dataConfig.dataDir,
                                                    "common.cfg")),
                 '--user={0}'.format(self.config['mysqld']['user']),
                 '--password={0}'.format(self.config['mysqld']['pass']),
                 '--socket={0}'.format(self.config['mysqld']['sock']),
-                '--delete-tables',
-                # WARN: required to unzip input data file
-                '--chunks-dir={0}'.format(os.path.join(tmp_dir,
-                                                       "qserv_data_loader",
-                                                       table))]
+                '--delete-tables']
+
+        if self.dataConfig.duplicatedTables:
+            # Other parameters if using duplicated data
+            cmd += ['--chunks-dir={0}'.format(os.path.join(tmp_dir
+                                                           ,self._out_dirname,
+                                                           "chunks/",table)),
+                    '--config={0}'.format(os.path.join(self.dataConfig.dataDir,
+                                                       table+".cfg"))]
+        else:
+            # WARN: required to unzip input data file
+            cmd += ['--chunks-dir={0}'.format(os.path.join(tmp_dir,
+                                                    "qserv_data_loader",
+                                                    table))]
 
         return cmd
 
     def loaderCmdCommonArgs(self, table):
         """
-        Return user-friendly loader command-line arguments wich are common
+        Return user-friendly loader command-line arguments which are common
         to both Qserv and MySQL
         """
         cmd = [self._dbName,
@@ -89,6 +98,6 @@ class DbLoader(object):
                self.dataConfig.getSchemaFile(table)]
 
         dataFile = self.dataConfig.getInputDataFile(table)
-        if dataFile:
+        if dataFile and not self.dataConfig.duplicatedTables:
             cmd += [dataFile]
         return cmd

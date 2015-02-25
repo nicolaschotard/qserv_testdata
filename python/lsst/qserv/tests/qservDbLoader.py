@@ -54,6 +54,7 @@ class QservLoader(DbLoader):
                                              "qserv", "empty_" +
                                              self._dbName +
                                              ".txt")
+        self.dataConfig = data_reader
 
     def createLoadTable(self, table):
         """
@@ -72,6 +73,9 @@ class QservLoader(DbLoader):
         loaderCmd = self.loaderCmdCommonOpts(table)
 
         loaderCmd += ['--css-remove']
+        
+        if self.dataConfig.duplicatedTables:
+            loaderCmd += ['--skip-partition']
 
         # include table-specific config if it exists
         tableCfg = os.path.join(self.dataConfig.dataDir, table + ".cfg")

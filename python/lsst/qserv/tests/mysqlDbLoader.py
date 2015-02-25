@@ -47,21 +47,25 @@ class MysqlLoader(DbLoader):
                                              out_dirname)
         self.logger = logging.getLogger(__name__)
 
+        self.dataConfig = data_reader
+
     def createLoadTable(self, table):
         self._callLoader(table)
 
     def _callLoader(self, table):
-        '''
+        """
         Call Qserv loader to load plain-MySQL table
-         '''
+        """
 
         self.logger.info("Create, load table %s", table)
 
         loaderCmd = self.loaderCmdCommonOpts(table)
 
         loaderCmd += ['--no-css',
-                      '--skip-partition',
-                      '--one-table']
+                      '--skip-partition']
+
+        if not self.dataConfig.duplicatedTables:
+            loaderCmd += ['--one-table']
 
         loaderCmd += self.loaderCmdCommonArgs(table)
 
