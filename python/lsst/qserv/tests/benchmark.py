@@ -79,6 +79,7 @@ class Benchmark(object):
         self.dataReader = dataConfig.DataConfig(self._in_dirname)
 
         self._queries_dirname = os.path.join(dataset_dir, "queries")
+
         self.dataDuplicator = dataDuplicator.DataDuplicator(self.dataReader,self._in_dirname,self._out_dirname)
 
     @staticmethod
@@ -250,19 +251,19 @@ class Benchmark(object):
 
         self.cleanup()
 
+        if load_data:
+            if self.dataReader.duplicatedTables:
+                self.logger.info("Tables to Duplicate %s" % self.dataReader.duplicatedTables)
+                self.dataDuplicator.run()
+
         for mode in mode_list:
             self._mode = mode
 
             self._dbName = "qservTest_case%s_%s" % (self._case_id, self._mode)
 
             if load_data:
-                if self.dataReader.duplicatedTables:
-                    self.logger.info("Tables to Duplicate %s" % self.dataReader.duplicatedTables)
-                    self.dataDuplicator.run()
                 self.connectAndInitDatabases()
                 self.loadData()
-                print "YYYYYYYYYYYYYYYYYYYYYYYYYY"
-                sys.exit()
                 self.finalize()
 
             self.runQueries(stop_at_query)
