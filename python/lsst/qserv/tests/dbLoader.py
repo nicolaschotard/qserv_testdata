@@ -72,19 +72,16 @@ class DbLoader(object):
                 '--password={0}'.format(self.config['mysqld']['pass']),
                 '--socket={0}'.format(self.config['mysqld']['sock']),
                 '--delete-tables']
-
+                
         if self.dataConfig.duplicatedTables:
             # Other parameters if using duplicated data
-            cmd += ['--chunks-dir={0}'.format(os.path.join(tmp_dir
-                                                           ,self._out_dirname,
-                                                           "chunks/",table)),
-                    '--config={0}'.format(os.path.join(self.dataConfig.dataDir,
+            cmd += ['--config={0}'.format(os.path.join(self.dataConfig.dataDir,
                                                        table+".cfg"))]
         else:
             # WARN: required to unzip input data file
             cmd += ['--chunks-dir={0}'.format(os.path.join(tmp_dir,
-                                                    "qserv_data_loader",
-                                                    table))]
+                                                           "qserv_data_loader",
+                                                           table))]
 
         return cmd
 
@@ -93,11 +90,17 @@ class DbLoader(object):
         Return user-friendly loader command-line arguments which are common
         to both Qserv and MySQL
         """
+        tmp_dir = self.config['qserv']['tmp_dir']
         cmd = [self._dbName,
                table,
                self.dataConfig.getSchemaFile(table)]
 
-        dataFile = self.dataConfig.getInputDataFile(table)
-        if dataFile and not self.dataConfig.duplicatedTables:
+        if self.dataConfig.duplicatedTables:
+            chunkname = "chunk_5468.txt"
+            dataFile = os.path.join(tmp_dir,self._out_dirname,"chunks/",table,chunkname)
+        else:
+            dataFile = self.dataConfig.getInputDataFile(table)
+
+        if dataFile:
             cmd += [dataFile]
         return cmd

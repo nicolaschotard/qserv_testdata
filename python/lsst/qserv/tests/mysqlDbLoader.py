@@ -62,10 +62,8 @@ class MysqlLoader(DbLoader):
         loaderCmd = self.loaderCmdCommonOpts(table)
 
         loaderCmd += ['--no-css',
-                      '--skip-partition']
-
-        if not self.dataConfig.duplicatedTables:
-            loaderCmd += ['--one-table']
+                      '--skip-partition',
+                      '--one-table']
 
         loaderCmd += self.loaderCmdCommonArgs(table)
 
