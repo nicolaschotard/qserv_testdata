@@ -29,6 +29,7 @@ Wrap Qserv user-friendly loader.
 
 import logging
 import os
+import glob
 
 from lsst.qserv.tests.sql import const
 
@@ -96,8 +97,10 @@ class DbLoader(object):
                self.dataConfig.getSchemaFile(table)]
 
         if self.dataConfig.duplicatedTables:
-            chunkname = "chunk_5468.txt"
-            dataFile = os.path.join(tmp_dir,self._out_dirname,"chunks/",table,chunkname)
+            for filename in glob.glob(os.path.join(tmp_dir,self._out_dirname,
+                                                   "chunks/",table,'chunk_[0-9][0-9][0-9][0-9].txt')):
+                os.system("cat "+filename+" >> "+os.path.join(tmp_dir,self._out_dirname,"chunks/",table,table+".txt"))
+            dataFile = os.path.join(tmp_dir,self._out_dirname,"chunks/",table,table+".txt")
         else:
             dataFile = self.dataConfig.getInputDataFile(table)
 
