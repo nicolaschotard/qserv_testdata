@@ -31,7 +31,11 @@ import os
 import sys
 import tempfile
 
+from lsst.db.db import Db
+from lsst.db.db import DbException
 from lsst.qserv.admin import commons
+from lsst.qserv.admin import qservAdmin
+from lsst.qserv.admin import workerAdmin
 from lsst.qserv.tests.dbLoader import DbLoader
 from lsst.qserv.tests.sql import cmd, connection
 
@@ -41,12 +45,14 @@ class QservLoader(DbLoader):
     def __init__(self, config,
                  data_reader,
                  db_name,
-                 out_dirname):
+                 out_dirname,
+                 multi_node):
 
         super(self.__class__, self).__init__(config,
                                              data_reader,
                                              db_name,
-                                             out_dirname)
+                                             out_dirname,
+                                             multi_node)
         self.logger = logging.getLogger(__name__)
 
         run_dir = self.config['qserv']['run_base_dir']
@@ -56,7 +62,13 @@ class QservLoader(DbLoader):
                                              ".txt")
         self.dataConfig = data_reader
         self.tmpDir = self.config['qserv']['tmp_dir']
+        self.multi_node = multi_node
 
+        # Adding Qserv Admin
+        if self.multi_node == True:
+            self.qAdmin = qservAdmin.QservAdmin('localhost:12181')
+            self.wAdmin = workerAdmin.WorkerAdmin('worker-dbdev3b',self.qAdmin)
+            self.db = self.wAdmin.mysqlConn(user='qsmaster')
 
     def createLoadTable(self, table):
         """
@@ -75,6 +87,10 @@ class QservLoader(DbLoader):
         loaderCmd = self.loaderCmdCommonOpts(table)
 
         loaderCmd += ['--css-remove']
+
+        if self.multi_node == True:
+            # Hard coded worker list
+            loaderCmd += ['--worker', 'worker-dbdev3b']
 
         if self.dataConfig.duplicatedTables:
             loaderCmd += ['--skip-partition']
@@ -122,8 +138,24 @@ class QservLoader(DbLoader):
             "USE {0}".format(self._dbName)
         ]
 
+        sql_instructions_multi = [
+            "DROP DATABASE %s" % self._dbName,
+            "CREATE DATABASE %s" % self._dbName,
+            "USE {0}".format(self._dbName)
+        ]
+
         for sql in sql_instructions:
             self._sqlInterface['sock'].execute(sql)
+
+        if self.multi_node == True:
+            for sql in sql_instructions_multi:
+                try:
+                    self.db.execCommandN(sql)
+                except DbException as exc:
+                    if exc.errCode() == DbException.DB_DOES_NOT_EXIST:
+                        self.logger.info("Drop Db failed")
+                    else:
+                        raise
 
         cmd_connection_params = self.sock_params
         cmd_connection_params['database'] = self._dbName
@@ -153,12 +185,20 @@ class QservLoader(DbLoader):
     def workerInsertXrootdExportPath(self):
         sql = ("SELECT * FROM qservw_worker.Dbs WHERE db='{0}';"
                .format(self._dbName))
-        rows = self._sqlInterface['sock'].execute(sql)
+
+        if self.multi_node == True:
+            rows = self.db.execCommandN(sql)
+        else:
+            rows = self._sqlInterface['sock'].execute(sql)
 
         if len(rows) == 0:
             sql = ("INSERT INTO qservw_worker.Dbs VALUES('{0}');"
                    .format(self._dbName))
-            self._sqlInterface['sock'].execute(sql)
+            if self.multi_node == True:
+                self.db.execCommandN(sql)
+            else:
+                self._sqlInterface['sock'].execute(sql)
+
         elif len(rows) > 1:
             self.logger.fatal("Duplicated value '%s' in qservw_worker.Dbs",
                               self._dbName)

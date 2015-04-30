@@ -54,7 +54,7 @@ MAX_QUERY = 10000
 
 class Benchmark(object):
 
-    def __init__(self, case_id, testdata_dir, out_dirname_prefix=None):
+    def __init__(self, case_id, multi_node, testdata_dir, out_dirname_prefix=None):
 
         self.logger = logging.getLogger(__name__)
         self.dataLoader = dict()
@@ -67,6 +67,7 @@ class Benchmark(object):
         self.noQservLine = re.compile(r'[\w\-\."%% ]*-- noQserv')
 
         self._case_id = case_id
+        self._multi_node = multi_node
 
         if not out_dirname_prefix:
             out_dirname_prefix = self.config['qserv']['tmp_dir']
@@ -219,14 +220,16 @@ class Benchmark(object):
                 self.config,
                 self.dataReader,
                 self._dbName,
-                self._out_dirname
+                self._out_dirname,
+                self._multi_node
             )
         elif (self._mode == 'qserv'):
             self.dataLoader[self._mode] = qservDbLoader.QservLoader(
                 self.config,
                 self.dataReader,
                 self._dbName,
-                self._out_dirname
+                self._out_dirname,
+                self._multi_node
             )
         self.logger.debug("Initializing database for %s mode" % self._mode)
         self.dataLoader[self._mode].prepareDatabase()
@@ -235,7 +238,7 @@ class Benchmark(object):
         if (self._mode == 'qserv'):
             self.dataLoader['qserv'].workerInsertXrootdExportPath()
 
-            # Reload xroot export paths w.r.t loaded chunks
+            # Reload xroot export paths w.r.t loaded chunks, change to qAdmin for multi
             commons.restart('xrootd')
 
             # Reload Qserv meta-data
