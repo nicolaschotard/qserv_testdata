@@ -255,7 +255,7 @@ CREATE TABLE `deepCoadd_meas` (
 `base_GaussianFlux_flag_badShape_galsim` boolean NOT NULL,
 `base_CircularApertureFlux_25_0_fluxSigma` float NOT NULL,
 `deblend_nChild` int(11) NOT NULL,
-`ext_shapeHSM_HsmShapeRegauss_flag_badCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`ext_shapeHSM_HsmShapeRegauss_flag_badCentroid_ANSD` boolean NOT NULL,
 `slot_ApFlux_fluxSigma` float NOT NULL,
 `base_PixelFlags_flag_clipped` boolean NOT NULL,
 `modelfit_CModel_dev_flag_numericError` boolean NOT NULL,
