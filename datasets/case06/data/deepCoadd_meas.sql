@@ -172,7 +172,7 @@ CREATE TABLE `deepCoadd_meas` (
 `ext_shapeHSM_HsmSourceMoments_flag_badCentroid_NSD` boolean NOT NULL,
 `base_PixelFlags_flag_suspect` boolean NOT NULL,
 `base_CircularApertureFlux_flag_badCentroid_notAtMaximum` boolean NOT NULL,
-`ext_shapeHSM_HsmPsfMoments_flag_badCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`ext_shapeHSM_HsmPsfMoments_flag_badCentroid_ANSD` boolean NOT NULL,
 `modelfit_GeneralShapeletPsfApprox_DoubleShapelet_0_x` float NOT NULL,
 `modelfit_GeneralShapeletPsfApprox_DoubleShapelet_0_y` float NOT NULL,
 `base_SdssShape_xx` float NOT NULL,
