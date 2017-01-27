@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `deepCoadd_meas`;
-CREATE TABLE `DeepCoadd` (
+CREATE TABLE `deepCoadd_meas` (
 `ext_shapeHSM_HsmSourceMoments_xy` float NOT NULL,
 `ext_shapeHSM_HsmSourceMoments_xx` float NOT NULL,
 `modelfit_CModel_exp_flag_trSmall` boolean NOT NULL,
