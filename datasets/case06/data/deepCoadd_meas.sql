@@ -134,7 +134,7 @@ CREATE TABLE `deepCoadd_meas` (
 `slot_ModelFlux_flag` boolean NOT NULL,
 `ext_shapeHSM_HsmPsfMoments_flag_galsim` boolean NOT NULL,
 `modelfit_CModel_initial_flag` boolean NOT NULL,
-`base_CircularApertureFlux_flag_badCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`base_CircularApertureFlux_flag_badCentroid_ANSD` boolean NOT NULL,
 `calib_psfUsed` boolean NOT NULL,
 `modelfit_CModel_flag` boolean NOT NULL,
 `base_GaussianCentroid_flag_badInitialCentroid_notAtMaximum` boolean NOT NULL,
