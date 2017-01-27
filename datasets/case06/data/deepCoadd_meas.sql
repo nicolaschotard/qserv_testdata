@@ -119,7 +119,7 @@ CREATE TABLE `deepCoadd_meas` (
 `modelfit_CModel_initial_flag_apCorr` boolean NOT NULL,
 `base_NaiveCentroid_x` float NOT NULL,
 `base_NaiveCentroid_y` float NOT NULL,
-`base_GaussianCentroid_flag_badInitialCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`base_GaussianCentroid_flag_badInitialCentroid_ANSD` boolean NOT NULL,
 `base_SdssCentroid_flag_notAtMaximum` boolean NOT NULL,
 `base_Variance_flag_badCentroid_edge` boolean NOT NULL,
 `modelfit_CModel_initial_objective` float NOT NULL,
