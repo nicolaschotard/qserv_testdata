@@ -169,7 +169,7 @@ CREATE TABLE `deepCoadd_meas` (
 `base_CircularApertureFlux_6_0_flag_sincCoeffsTruncated` boolean NOT NULL,
 `base_NaiveCentroid_flag_edge` boolean NOT NULL,
 `modelfit_CModel_initial_flag_maxIter` boolean NOT NULL,
-`ext_shapeHSM_HsmSourceMoments_flag_badCentroid_noSecondDerivative` boolean NOT NULL,
+`ext_shapeHSM_HsmSourceMoments_flag_badCentroid_NSD` boolean NOT NULL,
 `base_PixelFlags_flag_suspect` boolean NOT NULL,
 `base_CircularApertureFlux_flag_badCentroid_notAtMaximum` boolean NOT NULL,
 `ext_shapeHSM_HsmPsfMoments_flag_badCentroid_almostNoSecondDerivative` boolean NOT NULL,
