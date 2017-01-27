@@ -74,7 +74,7 @@ CREATE TABLE `deepCoadd_meas` (
 `base_NaiveCentroid_flag_badInitialCentroid_notAtMaximum` boolean NOT NULL,
 `base_SdssShape_flag_shift` boolean NOT NULL,
 `base_Variance_flag` boolean NOT NULL,
-`modelfit_DoubleShapeletPsfApprox_flag_badCentroid_noSecondDerivative` boolean NOT NULL,
+`modelfit_DoubleShapeletPsfApprox_flag_badCentroid_NSD` boolean NOT NULL,
 `base_Variance_value` float NOT NULL,
 `base_PixelFlags_flag_suspectCenter` boolean NOT NULL,
 `base_CircularApertureFlux_50_0_flag` boolean NOT NULL,
