@@ -1,6 +1,7 @@
 tables:
+  load-order:
   directors: [deepCoadd_meas]
   partitioned-tables: [deepCoadd_meas]
 extensions:
     data:   '.csv'
-    schema: '.schema'
+    schema: '.sql'
