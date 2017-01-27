@@ -49,7 +49,7 @@ CREATE TABLE `deepCoadd_meas` (
 `slot_Centroid_x` float NOT NULL,
 `patch` int(11) NOT NULL,
 `modelfit_CModel_initial_apCorr` float NOT NULL,
-`base_NaiveCentroid_flag_badInitialCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`base_NaiveCentroid_flag_badInitialCentroid_ANSDative` boolean NOT NULL,
 `modelfit_CModel_dev_time` float NOT NULL,
 `slot_ModelFlux_flux` float NOT NULL,
 `base_PsfFlux_apCorr` float NOT NULL,
