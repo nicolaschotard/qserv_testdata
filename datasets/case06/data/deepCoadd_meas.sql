@@ -59,7 +59,7 @@ CREATE TABLE `deepCoadd_meas` (
 `modelfit_CModel_ellipse_xy` float NOT NULL,
 `modelfit_CModel_ellipse_xx` float NOT NULL,
 `base_SdssCentroid_xSigma` float NOT NULL,
-`modelfit_DoubleShapeletPsfApprox_flag_badCentroid_almostNoSecondDerivative` boolean NOT NULL,
+`modelfit_DoubleShapeletPsfApprox_flag_badCentroid_ANSD` boolean NOT NULL,
 `modelfit_CModel_initial_time` float NOT NULL,
 `modelfit_CModel_dev_fixed_1` float NOT NULL,
 `slot_InstFlux_apCorrSigma` float NOT NULL,
