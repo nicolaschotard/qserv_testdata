@@ -15,5 +15,5 @@ CREATE TABLE `deepCoadd_meas` (
 `coord_ra_deg` float NOT NULL,
 `coord_dec_deg` float NOT NULL,
 PRIMARY KEY (`id`),
-KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`),
+KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
