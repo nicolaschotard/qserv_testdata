@@ -1,3 +1,3 @@
-SELECT d.id, d.base_ClassificationExtendedness_value
-FROM deepCoadd_meas d
-WHERE d.base_ClassificationExtendedness_value < 0.5
+SELECT d.id, d.modelfit_CModel_mag
+FROM deepCoadd_meas AS d
+WHERE d.modelfit_CModel_flux < 24
