@@ -20,7 +20,7 @@ CREATE TABLE `deepCoadd_meas` (
 `detect_isPrimary` boolean NULL,
 `base_ClassificationExtendedness_value` double NULL,
 `coord_dec` double NULL,
-`id` bigint NULL,
+`id` bigint(20) NULL,
 `modelfit_CModel_mag` double NULL,
 `modelfit_CModel_magSigma` double NULL,
 `x_Src` double NULL,
