@@ -478,8 +478,8 @@ CREATE TABLE `deepCoadd_meas` (
 `coord_dec_deg` double NULL,
 `patch` char(16) NULL,
 `tract` bigint(20) NULL,
-`objectId` bigint(20) NULL,
-PRIMARY KEY (`objectId`),
+`deepCoadd_measId` bigint(20) NULL,
+PRIMARY KEY (`deepCoadd_measId`),
 KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

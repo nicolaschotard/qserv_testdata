@@ -20,7 +20,6 @@ CREATE TABLE `deepCoadd_forced_src` (
 `base_PsfFlux_flag_badCentroid` boolean NULL,
 `modelfit_CModel_flux` double NULL,
 `modelfit_DoubleShapeletPsfApprox_1_yy` double NULL,
-`objectId` bigint(20) NULL,
 `base_PsfFlux_flag_noGoodPixels` boolean NULL,
 `modelfit_CModel_dev_flux` double NULL,
 `modelfit_DoubleShapeletPsfApprox_flag` boolean NULL,
@@ -215,7 +214,8 @@ CREATE TABLE `deepCoadd_forced_src` (
 `coord_dec_deg` double NULL,
 `patch` char(16) NULL,
 `tract` bigint(20) NULL,
-PRIMARY KEY (`objectId`),
+`deepCoadd_forced_srcId` bigint(20) NULL,
+PRIMARY KEY (`deepCoadd_forced_srcId`),
 KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
