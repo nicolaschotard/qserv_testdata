@@ -180,7 +180,6 @@ CREATE TABLE `deepCoadd_meas` (
 `base_SdssShape_xx` double NULL,
 `base_SdssShape_xy` double NULL,
 `base_CircularApertureFlux_35_0_flag_apertureTruncated` boolean NULL,
-`id` bigint(20) NULL,
 `parent` bigint(20) NULL,
 `modelfit_CModel_dev_flag_maxIter` boolean NULL,
 `ext_shapeHSM_HsmSourceMoments_flag` boolean NULL,
@@ -479,7 +478,8 @@ CREATE TABLE `deepCoadd_meas` (
 `coord_dec_deg` double NULL,
 `patch` char(16) NULL,
 `tract` bigint(20) NULL,
-PRIMARY KEY (`id`),
+`objectId` bigint(20) NULL,
+PRIMARY KEY (`objectId`),
 KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
