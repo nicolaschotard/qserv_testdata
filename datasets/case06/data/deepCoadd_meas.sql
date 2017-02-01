@@ -30,6 +30,7 @@ CREATE TABLE `deepCoadd_meas` (
 `patch` char(16) NULL,
 `tract` bigint(20) NULL,
 PRIMARY KEY (`id`),
+KEY `IDX_tract_patch_filter` (`tract`,`patch`,`filter`)
 KEY `IDX_filter` (`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
