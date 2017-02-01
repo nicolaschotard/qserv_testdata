@@ -27,6 +27,8 @@ CREATE TABLE `deepCoadd_meas` (
 `y_Src` double NULL,
 `coord_ra_deg` double NULL,
 `coord_dec_deg` double NULL,
+`patch` char(16) NULL,
+`tract` bigint(20) NULL,
 PRIMARY KEY (`id`),
 KEY `IDX_filter` (`filter`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
