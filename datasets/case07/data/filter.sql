@@ -6,10 +6,10 @@
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-DROP TABLE IF EXISTS `Filter`;
+DROP TABLE IF EXISTS `filter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Filter` (
+CREATE TABLE `filter` (
   `filterId` tinyint(4) NOT NULL,
   `filterName` char(3) NOT NULL,
   PRIMARY KEY (`filterId`)
