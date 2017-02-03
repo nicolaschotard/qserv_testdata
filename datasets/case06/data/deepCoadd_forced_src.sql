@@ -216,7 +216,7 @@ CREATE TABLE `deepCoadd_forced_src` (
 `tract` bigint(20) NULL,
 `deepCoadd_forced_srcId` bigint(20) NULL,
 PRIMARY KEY (`deepCoadd_forced_srcId`),
-KEY `parentObjectId` (`parentObjectId`)
+KEY `deepCoadd_forced_srcId` (`deepCoadd_forced_srcId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
