@@ -1,5 +1,5 @@
 extensions: {data: .csv, schema: .sql}
 tables:
   directors: [deepCoadd_meas]
-  partitioned-tables: [deepCoadd_meas, deepCoadd_forced_src]
-  load-order: [deepCoadd_meas, deepCoadd_forced_src]
+  partitioned-tables: [deepCoadd_meas]
+  load-order: [filter, deepCoadd_meas, deepCoadd_forced_src]
